@@ -15,6 +15,11 @@ export type ModuleId =
   | 'slang'
   | 'shadowing'
   | 'ipa'
+  | 'mirror'
+  | 'text2ipa'
+  | 'corporate'
+  | 'achievements'
+  | 'certificate'
   | 'progress';
 
 export interface User {
@@ -37,9 +42,9 @@ export interface SkillScores {
 export interface IndianismItem {
   id: string;
   indianism: string;
-  native: string;
+  nativeUS: string;
+  nativeUK: string;
   explanation: string;
-  accent: AccentType;
 }
 
 export interface SlangItem {
@@ -82,14 +87,16 @@ export interface ConnectedSpeechItem {
 export interface TongueTwister {
   id: string;
   text: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: 'easy' | 'medium' | 'hard' | 'insane';
   focusSound: string;
+  targetSpeed: number;
 }
 
 export interface MouthPosition {
   id: string;
   sound: string;
   ipa: string;
+  type: 'vowel' | 'consonant' | 'diphthong';
   description: string;
   tonguePosition: string;
   lipShape: string;
@@ -123,4 +130,21 @@ export interface IPASymbol {
   example: string;
   exampleWord: string;
   voiced: boolean;
+}
+
+export interface Badge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  xpRequired: number;
+  unlocked: boolean;
+}
+
+export interface CorporateTopic {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  phrases: { context: string; indianism: string; native: string }[];
 }
