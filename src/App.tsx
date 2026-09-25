@@ -14,6 +14,11 @@ import { DailyDrills } from '@/modules/DailyDrills';
 import { SlangVault } from '@/modules/SlangVault';
 import { ShadowingPlayer } from '@/modules/ShadowingPlayer';
 import { IPAChart } from '@/modules/IPAChart';
+import { AccentMirror } from '@/modules/AccentMirror';
+import { TextToIPA } from '@/modules/TextToIPA';
+import { CorporateComms } from '@/modules/CorporateComms';
+import { Achievements } from '@/modules/Achievements';
+import { Certificate } from '@/modules/Certificate';
 import { ProgressProfile } from '@/modules/ProgressProfile';
 import type { ModuleId } from '@/types';
 
@@ -30,6 +35,11 @@ const modules: Record<ModuleId, () => JSX.Element | null> = {
   slang: SlangVault,
   shadowing: ShadowingPlayer,
   ipa: IPAChart,
+  mirror: AccentMirror,
+  text2ipa: TextToIPA,
+  corporate: CorporateComms,
+  achievements: Achievements,
+  certificate: Certificate,
   progress: ProgressProfile,
 };
 

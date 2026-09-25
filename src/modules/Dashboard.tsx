@@ -6,15 +6,17 @@ import {
   Target,
   ArrowRight,
   CheckCircle2,
+  Zap,
+  Award,
 } from 'lucide-react';
-import { useApp } from '@/context/AppContext';
+import { useApp, allBadges } from '@/context/AppContext';
 import { RadarChart } from '@/components/RadarChart';
 import { Card } from '@/components/Card';
 import { curriculum } from '@/data/content';
 import type { ModuleId } from '@/types';
 
 export function Dashboard() {
-  const { user, accent, skillScores, completedLessons, setActiveModule } = useApp();
+  const { user, accent, skillScores, completedLessons, setActiveModule, xp, unlockedBadges } = useApp();
 
   const totalLessons = curriculum.length;
   const doneCount = completedLessons.length;
@@ -47,7 +49,7 @@ export function Dashboard() {
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <Card className="p-4">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center">
@@ -83,13 +85,24 @@ export function Dashboard() {
 
         <Card className="p-4">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center">
-              <Target className="w-4 h-4 text-zinc-700" />
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center">
+              <Zap className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wide">Level</span>
+            <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wide">XP</span>
           </div>
-          <p className="text-2xl font-bold text-black">{user?.level ?? 'B1'}</p>
-          <p className="text-xs text-zinc-400">current proficiency</p>
+          <p className="text-2xl font-bold text-black">{xp}</p>
+          <p className="text-xs text-zinc-400">points earned</p>
+        </Card>
+
+        <Card className="p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center">
+              <Award className="w-4 h-4 text-zinc-700" />
+            </div>
+            <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wide">Badges</span>
+          </div>
+          <p className="text-2xl font-bold text-black">{unlockedBadges.length}/{allBadges.length}</p>
+          <p className="text-xs text-zinc-400">unlocked</p>
         </Card>
       </div>
 
@@ -144,6 +157,33 @@ export function Dashboard() {
             </div>
             <p className="text-xs text-zinc-500 mt-2">
               {doneCount} of {totalLessons} lessons completed
+            </p>
+          </Card>
+
+          {/* XP progress */}
+          <Card className="p-5">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-sm font-bold text-black">XP Progress</h3>
+              <button
+                onClick={() => setActiveModule('achievements')}
+                className="flex items-center gap-1 text-xs font-semibold text-zinc-600 hover:text-black"
+              >
+                View badges <ArrowRight className="w-3 h-3" />
+              </button>
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-4 h-4 text-zinc-700" />
+              <span className="text-2xl font-bold text-black">{xp}</span>
+              <span className="text-xs text-zinc-400">XP earned</span>
+            </div>
+            <div className="w-full h-2.5 rounded-full bg-zinc-100 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-black transition-all duration-500"
+                style={{ width: `${Math.min(100, (unlockedBadges.length / allBadges.length) * 100)}%` }}
+              />
+            </div>
+            <p className="text-xs text-zinc-500 mt-2">
+              {unlockedBadges.length} of {allBadges.length} badges unlocked
             </p>
           </Card>
         </div>

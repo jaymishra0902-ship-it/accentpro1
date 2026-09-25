@@ -12,6 +12,10 @@ import {
   PlayCircle,
   BarChart3,
   Type,
+  Camera,
+  FileText,
+  Briefcase,
+  Award,
 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import type { ModuleId } from '@/types';
@@ -35,6 +39,11 @@ const navItems: NavItem[] = [
   { id: 'slang', label: 'Slang & Idioms', icon: BookOpen },
   { id: 'shadowing', label: 'Shadowing Player', icon: PlayCircle },
   { id: 'ipa', label: 'IPA Chart', icon: Type },
+  { id: 'mirror', label: 'Accent Mirror', icon: Camera },
+  { id: 'text2ipa', label: 'Text-to-IPA', icon: FileText },
+  { id: 'corporate', label: 'Corporate Comms', icon: Briefcase },
+  { id: 'achievements', label: 'Achievements', icon: Award },
+  { id: 'certificate', label: 'Certificate', icon: Award },
   { id: 'progress', label: 'Progress Profile', icon: BarChart3 },
 ];
 
